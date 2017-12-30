@@ -1,0 +1,479 @@
+====CISCO PACKET TRACER=====
+-------ROUTER A------
+enable
+configure terminal
+hostname RGA
+enable password network
+banner motd #Ini router A#
+
+interface fastethernet0/0
+ip address 10.0.8.1 255.255.252.0 
+do write
+no shutdown
+exit
+
+interface fastethernet0/1
+ip address 10.0.12.1 255.255.254.0
+do write
+no shutdown
+exit
+
+interface serial0/0/1
+ip address 100.100.100.1 255.255.255.252
+do write
+no shutdown
+exit
+
+interface serial0/0/0
+ip address 120.120.120.1 255.255.255.252
+do write
+no shutdown
+exit
+
+configure terminal
+router rip
+version 2
+no auto-summary
+network 10.0.8.0 
+network 10.0.12.0
+network 100.100.100.0
+network 120.120.120.0
+do write
+exit
+
+-------ROUTER B------
+enable
+configure terminal
+hostname RGB
+enable password network
+banner motd #Ini router B#
+
+interface fastethernet0/0
+ip address 10.0.0.1 255.255.248.0
+do write
+no shutdown
+exit
+
+interface fastethernet0/1
+ip address 10.0.14.1 255.255.254.0
+do write
+no shutdown
+exit
+
+interface serial0/0/1
+ip address 100.100.100.2 255.255.255.252
+do write
+no shutdown
+exit
+
+interface serial0/0/0
+ip address 110.110.110.1 255.255.255.252
+do write
+no shutdown
+exit
+
+configure terminal
+router rip
+version 2
+no auto-summary
+network 100.100.100.0
+network 110.110.110.0
+network 10.0.14.0
+network 10.0.0.0
+do write
+exit
+
+-------ROUTER C------
+enable
+configure terminal
+hostname RGC
+enable password network
+banner motd #Ini router C#
+
+interface serial0/0/0
+ip address 130.130.130.2 255.255.255.252
+do write
+no shutdown
+exit
+
+interface serial0/0/1
+ip address 120.120.120.2 255.255.255.252
+do write
+no shutdown
+exit
+
+interface seria0/2/0
+ip address 200.200.200.1 255.255.255.252
+do write
+no shutdown
+exit
+
+configure terminal
+router rip
+version 2
+no auto-summary
+network 130.130.130.0
+network 120.120.120.0
+network 200.200.200.0
+do write
+exit
+
+-------ROUTER ISP------
+
+enable
+configure terminal
+hostname RISP
+enable password network
+banner motd #Ini router ISP#
+
+interface serial0/0/0
+ip address 200.200.200.2 255.255.255.252
+do write
+no shutdown
+exit
+
+interface serial0/0/1 
+ip address 50.50.50.1 255.255.255.252
+do write
+no shutdown
+exit
+
+configure terminal
+router rip
+version 2
+no auto-summary
+network 200.200.200.0
+network 50.50.50.0
+do write
+exit
+
+-------ROUTER Server------
+enable
+configure terminal
+hostname SERVER
+enable password network
+banner motd #Ini router server#
+
+interface serial0/0/0
+ip address 50.50.50.2 255.255.255.252
+do write 
+no shutdown
+exit
+
+interface fastethernet0/0
+ip address 192.168.1.1 255.255.255.248
+do write
+no shutdown
+exit
+
+router rip
+version 2
+no auto-summary
+network 192.168.1.0
+network 50.50.50.0
+do write
+exit
+
+-------ROUTER D------
+enable
+configure terminal
+hostname RGD
+enable password network
+banner motd #Ini router D#
+
+interface  fastethernet0/0
+ip address 10.0.16.1 255.255.255.0
+do write
+no shutdown
+exit
+
+interface fastethernet0/1
+ip address 10.0.17.1 255.255.255.0
+do write
+no shutdown
+exit
+
+interface serial0/0/0 
+ip address 110.110.110.2 255.255.255.252
+do write
+no shutdown
+exit
+
+interface serial0/0/1
+ip address 130.130.130.1 255.255.255.252
+do write
+no shutdown
+exit
+
+configure terminal
+router rip
+version 2
+no auto-summary
+network 110.110.110.0
+network 130.130.130.0
+network 10.0.16.0
+network 10.0.17.0
+do write
+exit
+
+
+=============GNS============
+-------ROUTER A------
+
+enable
+configure terminal
+interface ethernet1/1 
+ip add 10.0.8.1 255.255.252.0 
+do write
+no shutdown
+exit
+
+interface ethernet1/2
+ip add 10.0.12.1 255.255.254.0
+do write
+no shutdown
+exit
+
+interface fastethernet0/0
+ip add 100.100.100.1 255.255.255.252
+no shutdown
+do write
+exit
+
+interface fastethernet2/0
+ip add 120.120.120.1 255.255.255.252
+do write
+no shutdown
+exit
+
+
+
+//SwGA2
+//pc3
+ip 10.0.8.2 255.255.252.0 10.0.8.1
+save
+
+//pc4
+ip 10.0.8.3 255.255.252.0 10.0.8.1
+save
+
+
+
+//SwGA1
+//pc1
+ip 10.0.12.2 255.255.254.0 10.0.12.1
+save
+
+//pc2
+ip 10.0.12.3 255.255.254.0 10.0.12.1
+save
+
+configure terminal
+router rip
+version 2
+no auto-summary
+network 10.0.8.0 
+network 10.0.12.0
+network 100.100.100.0
+network 120.120.120.0
+do write
+exit
+
+-------ROUTER B------
+
+enable
+configure terminal
+interface ethernet1/1
+ip add 10.0.14.1 255.255.254.0
+do write
+no shutdowndown
+exit
+
+interface ethernet1/2
+ip add 10.0.0.1 255.255.248.0
+do write
+no shutdowndown
+exit
+
+interface fastethernet0/0 
+ip add 100.100.100.2 255.255.255.252
+do write
+no shutdowndown
+exit
+
+interface fastethernet2/0
+ip add 110.110.110.1 255.255.255.252
+do write
+no shutdowndown
+exit
+
+
+//SwGB1
+//pc1
+ip 10.0.14.2 255.255.254.0 10.0.14.1
+save
+
+//pc2
+ip 10.0.14.3 255.255.254.0 10.0.14.2
+save
+
+//SwGB2
+//pc3
+ip 10.0.0.2 255.255.248.0 10.0.0.1
+save
+
+//pc4
+ip 10.0.0.3 255.255.248.0 10.0.0.1
+save
+
+configure terminal
+router rip
+version 2
+no auto-summary
+network 100.100.100.0
+network 110.110.110.0
+network 10.0.14.0
+network 10.0.0.0
+do write
+exit
+
+-------ROUTER C------
+enable
+configure terminal
+interface fastethernet1/0
+ip add 130.130.130.2 255.255.255.252
+do write
+no shutdown
+exit
+
+interface fastethernet0/0
+ip add 120.120.120.2 255.255.255.252
+do write
+no shutdown
+exit
+
+interface fastethernet2/0
+ip add 200.200.200.1 255.255.255.252
+do write
+no shutdown
+exit
+
+configure terminal
+router rip
+version 2
+no auto-summary
+network 130.130.130.0
+network 120.120.120.0
+network 200.200.200.0
+do write
+exit
+
+-------ROUTER ISP------
+enable
+configure terminal
+interface fastethernet0/0
+ip add 200.200.200.2 255.255.255.252
+do write
+no shutdown
+exit
+
+interface fastethernet1/0 
+ip add 50.50.50.1 255.255.255.252
+do write
+no shutdown
+exit
+
+configure terminal
+router rip
+version 2
+no auto-summary
+network 200.200.200.0
+network 50.50.50.0
+do write
+exit
+
+-------ROUTER Server------
+enable
+configure terminal
+interface fastethernet0/0
+ip add 50.50.50.2 255.255.255.252
+do write 
+no shutdown
+exit
+
+interface ethernet1/0
+ip add 192.168.1.1 255.255.255.248
+do write
+no shutdown
+exit
+
+//PC-PT Serv1
+ip 192.168.1.2 255.255.255.248 192.168.1.1
+save
+ 
+configure terminal
+router rip
+version 2
+no auto-summary
+network 192.168.1.0
+network 50.50.50.0
+do write
+exit
+
+-------ROUTER D------
+
+enable
+configure terminal
+interface  ethernet1/2
+ip add 10.0.16.1 255.255.255.0
+do write
+no shutdown
+exit
+
+interface ethernet1/3
+ip add 10.0.17.1 255.255.255.0
+do write
+no shutdown
+exit
+
+interface fastethernet2/0
+ip add 110.110.110.2 255.255.255.252
+do write
+no shutdown
+exit
+
+interface fastethernet0/0 
+ip add 130.130.130.1 255.255.255.252
+do write
+no shutdown
+exit
+
+
+//SwGC1
+//pc 1
+ip 10.0.16.2 255.255.255.0 10.0.16.1
+save
+
+//pc 2
+ip 10.0.16.3 255.255.255.0 10.0.16.1
+save
+
+//SwGC2
+//pc3
+ip 10.0.17.2 255.255.255.0 10.0.17.1
+save
+
+//pc13
+ip 10.0.17.3 255.255.255.0 10.0.17.1
+save
+
+configure terminal
+router rip
+version 2
+no auto-summary
+network 110.110.110.0
+network 130.130.130.0
+network 10.0.16.0
+network 10.0.17.0
+do write
+exit
